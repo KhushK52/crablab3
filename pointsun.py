@@ -47,7 +47,7 @@ try:
                 ifm.point(alt, az)
 
             print("I do be pointing")
-            time.sleep(30)   #gives a delay of 30s before it starts running the code again
+            time.sleep(60)   #gives a delay of 30s before it starts running the code again
 except KeyboardInterrupt:
     print("That's enough! You stopped pointing")
     np.savez(f'{file}.npz', dates=julians)
