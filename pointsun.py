@@ -11,6 +11,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('--filename', '-n', help='name to give file')
 
+
 #parser to name files more conviniently
 args = parser.parse_args()
 file = args.filename
@@ -18,6 +19,9 @@ file = args.filename
 
 #start dictionary of dates
 julians = {}
+alts = {}
+azs = {}
+
 #start keeping track of keys for julians dictionary
 num = 0
 
@@ -37,7 +41,10 @@ try:
             ra, dec = ugradio.coord.sunpos(jd = jd)
             pra, pdec = ugradio.coord.precess(ra = ra, dec = dec, jd=jd)
             alt, az = ugradio.coord.get_altaz(ra = pra, dec = pdec, jd=jd)   #ugradio.coord.get_altaz(pra, pdec, jd, lat, lon, alt) default for lat,lon,alt is nch
+            alts.update({num:alt})
+            azs.update({num:az})
 
+        
             #point the big bois
             if az <= 90:
                 ifm.point(az=az+180, alt=alt+90)
@@ -47,10 +54,12 @@ try:
                 ifm.point(alt, az)
 
             print("I do be pointing")
-            time.sleep(60)   #gives a delay of 30s before it starts running the code again
+            time.sleep(30)   #gives a delay of 30s before it starts running the code again
 except KeyboardInterrupt:
     print("That's enough! You stopped pointing")
     np.savez(f'{file}.npz', dates=julians)
+    np.savez('{}alt.npz'.format(file), alts=alts)
+    np.savez('{}az.npz'.format(file), azs=azs)
     # stops running the script when u press Ctrl C
 
 
