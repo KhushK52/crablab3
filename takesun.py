@@ -16,7 +16,7 @@ parser.add_argument('--record_time', '-t', type = int,  help='length of time to 
 #parser to name files more conviniently
 args = parser.parse_args()
 file = args.filename
-record_time = float(args.record_time)
+record_time = args.record_time
 
 ifm = ugradio.interf.Interferometer()
 
@@ -53,7 +53,7 @@ def sun_pointing():
             print("I do be pointing")
             time.sleep(30)   #gives a delay of 30s before it starts running the code again
     print("That's enough! You stopped pointing")
-    np.savez(f'{file}.npz', dates=julians)
+    np.savez(f'{file}dates.npz', dates=julians)
         # stops running the script when u press Ctrl C
 
 
@@ -63,13 +63,13 @@ def read():
     while running: 
         if count == 0:
             data=spec.read_data(prev_cnt=None)
+	    np.savez(f'{file}specs{count}', data = data)
             count += 1
-            np.savez(f'{file}specs{count}', data = data)
         else:
-            data=spec.read_data(prev_cnt=(count-1))
+            data=spec.read_data(prev_cnt=(count))
+	    np.savez(f'{file}specs{count}', data = data)
             count += 1 
-            np.savez(f'{file}specs{count}', data = data)
-    np.savez(f'{file}specs.npz', data = data)
+  
 
 
 def duration(mins):
