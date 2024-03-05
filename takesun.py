@@ -10,13 +10,13 @@ import glob
 import argparse 
 import threading
 parser = argparse.ArgumentParser()
-parser.add_argument('--filename', '-n', help='name to give file')
-parser.add_argument('--record_time', '-t', type = int, help='length of time to take data for')
+parser.add_argument('--filename', '-n', type = str ,help='name to give file')
+parser.add_argument('--record_time', '-t', type = int,  help='length of time to take data for')
 
 #parser to name files more conviniently
 args = parser.parse_args()
 file = args.filename
-record_time = args.record_time
+record_time = float(args.record_time)
 
 ifm = ugradio.interf.Interferometer()
 
@@ -65,7 +65,6 @@ def read():
             data=spec.read_data(prev_cnt=None)
             count += 1
             np.savez(f'{file}specs{count}', data = data)
-
         else:
             data=spec.read_data(prev_cnt=(count-1))
             count += 1 
