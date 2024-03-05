@@ -66,7 +66,7 @@ def read():
             np.savez(f'{file}specs{count}', data = data)
             count += 1
         else:
-            data=spec.read_data(prev_cnt=(count-1))
+            data=spec.read_data(prev_cnt=(count))
             np.savez(f'{file}specs{count}', data = data)
             count += 1 
 
