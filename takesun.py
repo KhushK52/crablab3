@@ -60,15 +60,10 @@ def sun_pointing():
 def read():
     global running
     count = None 
-    while running: 
-        if (count == None):
-            data=spec.read_data(prev_cnt=count)
-            np.savez(f'{file}specs{count}', data = data)
-            count = data['acc_cnt']
-        else:
-            data=spec.read_data(prev_cnt=(count-1))
-            np.savez(f'{file}specs{count}', data = data)
-            count = data['acc_cnt']
+    while running:
+        data=spec.read_data(prev_cnt=count)
+        np.savez(f'{file}specs{count}', **data)
+        count = data['acc_cnt']
 
 
 def duration(mins):
