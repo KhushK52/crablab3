@@ -61,9 +61,12 @@ def read():
     global running
     count = None 
     while running:
-        data=spec.read_data(prev_cnt=count)
-        np.savez(f'{file}specs{count}', **data)
-        count = data['acc_cnt']
+        try: 
+            data=spec.read_data(prev_cnt=count)
+            np.savez(f'{file}specs{count}', **data)
+            count = data['acc_cnt']
+        except(AssertionError):
+            count = None
 
 
 def duration(mins):
