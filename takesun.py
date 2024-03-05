@@ -11,12 +11,12 @@ import argparse
 import threading
 parser = argparse.ArgumentParser()
 parser.add_argument('--filename', '-n', help='name to give file')
-parser.add_argument('--record_time', '-t', help='length of time to take data for')
+parser.add_argument('--record_time', '-t', type = int, help='length of time to take data for')
 
 #parser to name files more conviniently
 args = parser.parse_args()
 file = args.filename
-record_time = float(args.record_time)
+record_time = args.record_time
 
 ifm = ugradio.interf.Interferometer()
 
@@ -58,7 +58,6 @@ def sun_pointing():
 
 def read():
     count = 0 
-    len = len(data)
     while running: 
         if count == 0:
             data=spec.read_data(prev_cnt=None)
