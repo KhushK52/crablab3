@@ -25,7 +25,8 @@ spec.initialize(mode='corr')
 
 running = True 
 
-def sun_pointing(): 
+def sun_pointing():
+    global running  
     #start dictionary of dates
     julians = {}
     #start keeping track of keys for julians dictionary
@@ -57,6 +58,7 @@ def sun_pointing():
 
 
 def read():
+    global running 
     count = 0 
     while running: 
         if count == 0:
@@ -72,6 +74,7 @@ def read():
 
 
 def duration(mins):
+    global running 
     time.sleep(mins * 60)
     running = False
 
@@ -88,10 +91,10 @@ if az >= 300:
 else: 
     ifm.point(alt, az)
 
-thread = threading.Thread(target=read)
-time_thread = threading.Thread(target=duration, args = record_time)
-time_thread.daemon=True
-thread.daemon = True 
+thread = threading.Thread(target=read, daemon=True)
+time_thread = threading.Thread(target=duration, args = (record_time,), daemon=True)
+
+ 
 thread.start()
 time_thread.start()
 
