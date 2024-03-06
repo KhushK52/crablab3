@@ -65,7 +65,6 @@ def read():
             data=spec.read_data(prev_cnt=count)
             np.savez(f'{file}specs{count}', **data)
             count = data['acc_cnt']
-            time.sleep(30)
         except(AssertionError):
             count = None
 
