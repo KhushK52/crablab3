@@ -44,9 +44,9 @@ def sun_pointing():
 
             #point the big bois
             if az <= 90:
-                ifm.point(az=az+180, alt=alt+90)
+                ifm.point(az=az+180, alt=(180-2*alt)+alt)
             if az >= 300:
-                ifm.point(az=az-180, alt=alt+90)
+                ifm.point(az=az-180, alt=(180-2*alt)+alt)
             else: 
                 ifm.point(alt, az)
 
@@ -81,9 +81,9 @@ ra, dec = ugradio.coord.sunpos(jd = jd)
 pra, pdec = ugradio.coord.precess(ra = ra, dec = dec, jd=jd)
 alt, az = ugradio.coord.get_altaz(ra = pra, dec = pdec, jd=jd)
 if az <= 90:
-    ifm.point(az=az+180, alt=alt+90)
+    ifm.point(az=az+180, alt=(180-2*alt)+alt)
 if az >= 300:
-    ifm.point(az=az-180, alt=alt+90)
+    ifm.point(az=az-180, alt=(180-2*alt)+alt)
 else: 
     ifm.point(alt, az)
 
