@@ -33,6 +33,10 @@ for i in np.arange(len(data)):
     imagin.append(data[i].imag)
 
 data = np.array(data)
+print(len(data))
+print(len(real))
+print(len(imaging))
+
 
 plt.figure(figsize = (12,6))
 
