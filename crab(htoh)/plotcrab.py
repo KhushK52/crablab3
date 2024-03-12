@@ -33,9 +33,6 @@ for i in np.arange(len(data)):
     imagin.append(data[i].imag)
 
 data = np.array(data)
-print(len(data))
-print(len(real))
-print(len(imagin))
 
 
 plt.figure(figsize = (12,6))
@@ -45,13 +42,14 @@ plt.plot(imagin[50])
 #plt.ylim(0,50)
 plt.xlabel("Frequency")
 plt.ylabel("Power")
+
+
+#plt.figure(figsize = (12,6))
+#plt.imshow(np.abs(data), cmap='magma', vmin=0, vmax = 3)
+#plt.colorbar()
+
+#plt.figure(figsize = (12,6))
+#plt.imshow(np.angle(data), cmap='magma', vmin=0, vmax = 3)
+#plt.colorbar()
+
 plt.show()
-
-plt.figure(figsize = (12,6))
-plt.imshow(np.abs(data), cmap='magma', vmin=0, vmax = 3)
-plt.colorbar()
-
-plt.figure(figsize = (12,6))
-plt.imshow(np.angle(data), cmap='magma', vmin=0, vmax = 3)
-plt.colorbar()
-
