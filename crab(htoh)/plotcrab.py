@@ -7,7 +7,7 @@ import glob
 import argparse 
 import threading
 
-files = glob.glob("crab(htoh)/crabspecs*")
+files = glob.glob("crabspecs*")
 files = sorted(files)
 
 specs = {f[:-4]: np.load(f, allow_pickle=True)["corr01"] for f in files}
@@ -35,7 +35,7 @@ for i in np.arange(len(data)):
 data = np.array(data)
 print(len(data))
 print(len(real))
-print(len(imaging))
+print(len(imagin))
 
 
 plt.figure(figsize = (12,6))
